@@ -5,6 +5,7 @@ import ca.landonjw.gooeylibs.cookbook.commands.ratelimit.RateLimitPageCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.snake.SnakeCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.synchronization.SynchronizedCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.shooter.ShooterCommand;
+import ca.landonjw.gooeylibs.cookbook.commands.trade.TradeCommand;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
@@ -28,6 +29,7 @@ public class Cookbook {
         event.registerServerCommand(new SnakeCommand());
         event.registerServerCommand(new SynchronizedCommand());
         event.registerServerCommand(new AnimatedCommand());
+        event.registerServerCommand(new TradeCommand());
     }
 
 }

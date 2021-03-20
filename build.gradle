@@ -44,7 +44,7 @@ repositories {
 
 dependencies {
 	implementation 'com.github.landonjw:GooeyLibs:v2.00-alpha'
-	compileOnly 'reforged:server:8.1.2@Pixelmon-1.12.2-8.1.2-server.jar'
+	compile files('libs/Pixelmon-1.12.2-8.1.2-universal.jar')
 }
 
 processResources {

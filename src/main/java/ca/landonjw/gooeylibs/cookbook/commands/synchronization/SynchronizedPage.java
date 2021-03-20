@@ -10,6 +10,10 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
+/**
+ * This page demonstrates an interface that is able to be synchronized between many players.
+ * This updating is done upon a button being set to the template in #setActive.
+ */
 public class SynchronizedPage extends UpdateEmitter<Page> implements Page {
 
     private final ChestTemplate template;
@@ -39,8 +43,10 @@ public class SynchronizedPage extends UpdateEmitter<Page> implements Page {
     }
 
     private void setActive(boolean state) {
+        // Toggles the button that is used to set the page active/inactive
         template.getSlot(3, 4).setButton((state) ? setInactiveButton : setActiveButton);
         this.title = state ? TextFormatting.GREEN + "Active Page!" : TextFormatting.RED + "Inactive Page!";
+        // Refreshes the container for all viewers
         update();
     }
 
