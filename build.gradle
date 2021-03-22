@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.github.landonjw:GooeyLibs:v2.00-alpha'
+	compile files('libs/GooeyLibs-2.0.0.jar')
 	compile files('libs/Pixelmon-1.12.2-8.1.2-universal.jar')
 }
 
