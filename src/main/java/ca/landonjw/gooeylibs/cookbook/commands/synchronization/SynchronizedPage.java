@@ -1,10 +1,10 @@
 package ca.landonjw.gooeylibs.cookbook.commands.synchronization;
 
-import ca.landonjw.gooeylibs.api.button.GooeyButton;
-import ca.landonjw.gooeylibs.api.data.UpdateEmitter;
-import ca.landonjw.gooeylibs.api.page.Page;
-import ca.landonjw.gooeylibs.api.template.Template;
-import ca.landonjw.gooeylibs.api.template.types.ChestTemplate;
+import ca.landonjw.gooeylibs2.api.button.GooeyButton;
+import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
+import ca.landonjw.gooeylibs2.api.page.Page;
+import ca.landonjw.gooeylibs2.api.template.Template;
+import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;

@@ -1,13 +1,13 @@
 package ca.landonjw.gooeylibs.cookbook.commands.snake;
 
-import ca.landonjw.gooeylibs.api.button.Button;
-import ca.landonjw.gooeylibs.api.button.GooeyButton;
-import ca.landonjw.gooeylibs.api.data.UpdateEmitter;
-import ca.landonjw.gooeylibs.api.page.Page;
-import ca.landonjw.gooeylibs.api.template.Template;
-import ca.landonjw.gooeylibs.api.template.types.ChestTemplate;
-import ca.landonjw.gooeylibs.api.template.types.InventoryTemplate;
-import ca.landonjw.gooeylibs.implementation.tasks.Task;
+import ca.landonjw.gooeylibs2.api.button.Button;
+import ca.landonjw.gooeylibs2.api.button.GooeyButton;
+import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
+import ca.landonjw.gooeylibs2.api.page.Page;
+import ca.landonjw.gooeylibs2.api.template.Template;
+import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
+import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
+import ca.landonjw.gooeylibs2.implementation.tasks.Task;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package ca.landonjw.gooeylibs.cookbook.commands.synchronization;
 
-import ca.landonjw.gooeylibs.api.UIManager;
+import ca.landonjw.gooeylibs2.api.UIManager;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -1,14 +1,14 @@
 package ca.landonjw.gooeylibs.cookbook.commands.ratelimit;
 
-import ca.landonjw.gooeylibs.api.button.Button;
-import ca.landonjw.gooeylibs.api.button.GooeyButton;
-import ca.landonjw.gooeylibs.api.button.RateLimitedButton;
-import ca.landonjw.gooeylibs.api.data.UpdateEmitter;
-import ca.landonjw.gooeylibs.api.page.Page;
-import ca.landonjw.gooeylibs.api.template.Template;
-import ca.landonjw.gooeylibs.api.template.types.ChestTemplate;
-import ca.landonjw.gooeylibs.api.template.types.InventoryTemplate;
-import ca.landonjw.gooeylibs.implementation.tasks.Task;
+import ca.landonjw.gooeylibs2.api.button.Button;
+import ca.landonjw.gooeylibs2.api.button.GooeyButton;
+import ca.landonjw.gooeylibs2.api.button.RateLimitedButton;
+import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
+import ca.landonjw.gooeylibs2.api.page.Page;
+import ca.landonjw.gooeylibs2.api.template.Template;
+import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
+import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
+import ca.landonjw.gooeylibs2.implementation.tasks.Task;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -55,7 +55,7 @@ public class RateLimitPage extends UpdateEmitter<Page> implements Page {
 
         this.template = ChestTemplate.builder(6).build();
         this.playerTemplate = InventoryTemplate.builder()
-                .set(3, 4, clickMe)
+                .set(3, 4, rateLimitedButton)
                 .build();
         Task.builder()
                 .execute(() -> updateBar())

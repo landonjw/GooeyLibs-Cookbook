@@ -2,11 +2,14 @@ package ca.landonjw.gooeylibs.cookbook;
 
 import ca.landonjw.gooeylibs.cookbook.commands.animation.AnimatedCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.configurable.ConfigurableCommand;
+import ca.landonjw.gooeylibs.cookbook.commands.inventory.InventoryTestPage;
+import ca.landonjw.gooeylibs.cookbook.commands.moveable.MoveableCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.ratelimit.RateLimitPageCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.snake.SnakeCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.synchronization.SynchronizedCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.shooter.ShooterCommand;
 import ca.landonjw.gooeylibs.cookbook.commands.trade.TradeCommand;
+import ca.landonjw.gooeylibs.cookbook.commands.types.CylePageCommand;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraftforge.fml.common.Mod;
@@ -42,6 +45,9 @@ public class Cookbook {
         event.registerServerCommand(new AnimatedCommand());
         event.registerServerCommand(new TradeCommand());
         event.registerServerCommand(new ConfigurableCommand());
+        event.registerServerCommand(new MoveableCommand());
+        event.registerServerCommand(new CylePageCommand());
+        event.registerServerCommand(new InventoryTestPage());
     }
 
 }

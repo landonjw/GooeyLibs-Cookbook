@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-	compile files('libs/GooeyLibs-2.0.0.jar')
+	compile files('libs/GooeyLibs-2.1.0.jar')
 	compile files('libs/Pixelmon-1.12.2-8.1.2-universal.jar')
 }
 

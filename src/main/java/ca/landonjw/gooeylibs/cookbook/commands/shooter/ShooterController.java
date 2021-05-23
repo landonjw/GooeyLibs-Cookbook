@@ -1,10 +1,10 @@
 package ca.landonjw.gooeylibs.cookbook.commands.shooter;
 
-import ca.landonjw.gooeylibs.api.data.UpdateEmitter;
+import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
 import ca.landonjw.gooeylibs.cookbook.commands.shooter.enemies.LargeAsteroid;
 import ca.landonjw.gooeylibs.cookbook.commands.shooter.enemies.MediumAsteroid;
 import ca.landonjw.gooeylibs.cookbook.commands.shooter.enemies.SmallAsteroid;
-import ca.landonjw.gooeylibs.implementation.tasks.Task;
+import ca.landonjw.gooeylibs2.implementation.tasks.Task;
 import com.google.common.collect.Lists;
 
 import java.util.List;

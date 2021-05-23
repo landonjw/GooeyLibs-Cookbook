@@ -1,12 +1,12 @@
 package ca.landonjw.gooeylibs.cookbook.commands.trade;
 
-import ca.landonjw.gooeylibs.api.button.GooeyButton;
-import ca.landonjw.gooeylibs.api.data.UpdateEmitter;
-import ca.landonjw.gooeylibs.api.page.Page;
-import ca.landonjw.gooeylibs.api.page.PageAction;
-import ca.landonjw.gooeylibs.api.template.LineType;
-import ca.landonjw.gooeylibs.api.template.Template;
-import ca.landonjw.gooeylibs.api.template.types.InventoryTemplate;
+import ca.landonjw.gooeylibs2.api.button.GooeyButton;
+import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
+import ca.landonjw.gooeylibs2.api.page.Page;
+import ca.landonjw.gooeylibs2.api.page.PageAction;
+import ca.landonjw.gooeylibs2.api.template.LineType;
+import ca.landonjw.gooeylibs2.api.template.Template;
+import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.items.ItemPixelmonSprite;

@@ -1,9 +1,9 @@
 package ca.landonjw.gooeylibs.cookbook.commands.configurable;
 
-import ca.landonjw.gooeylibs.api.UIManager;
-import ca.landonjw.gooeylibs.api.button.GooeyButton;
-import ca.landonjw.gooeylibs.api.page.GooeyPage;
-import ca.landonjw.gooeylibs.api.template.types.InventoryTemplate;
+import ca.landonjw.gooeylibs2.api.UIManager;
+import ca.landonjw.gooeylibs2.api.button.GooeyButton;
+import ca.landonjw.gooeylibs2.api.page.GooeyPage;
+import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -34,11 +34,11 @@ public class ConfigurableCommand extends CommandBase {
 
         GooeyButton filler4 = GooeyButton.of(new ItemStack(Items.APPLE));
 
-        ConfigurableTemplate template = ConfigurableTemplate.builder(6)
+        ConfigurableTemplate template = ConfigurableTemplate.configurableBuilder(6)
                 .border(0, 0, 6, 9, filler)
                 .border(1, 1, 4, 7, filler2)
                 .checker(2, 2, 2, 5, filler3, filler4)
-                .configPath("config/gooeylibs/config.json")
+                .configPath("config/gooeylibs2/config.json")
                 .build();
 
         InventoryTemplate inventoryTemplate = InventoryTemplate.builder()
