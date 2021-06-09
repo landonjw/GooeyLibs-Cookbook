@@ -9,8 +9,8 @@ import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
 import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
 import ca.landonjw.gooeylibs2.implementation.tasks.Task;
 import com.google.common.collect.Lists;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Tuple;
 
 import java.util.List;
@@ -86,7 +86,7 @@ public class SnakePage extends UpdateEmitter<Page> implements Page {
             }
         }
         this.applePosition = applePosition;
-        template.getSlot(applePosition.getFirst(), applePosition.getSecond()).setButton(apple);
+        template.getSlot(applePosition.getA(), applePosition.getB()).setButton(apple);
     }
 
     private void addSnakePart() {
@@ -96,8 +96,8 @@ public class SnakePage extends UpdateEmitter<Page> implements Page {
 
     private void setNextFrame() {
         Tuple<Integer, Integer> snakeHead = snakeParts.get(0);
-        int newHeadRow = snakeHead.getFirst();
-        int newHeadCol = snakeHead.getSecond();
+        int newHeadRow = snakeHead.getA();
+        int newHeadCol = snakeHead.getB();
 
         switch (direction) {
             case UP:
@@ -117,13 +117,13 @@ public class SnakePage extends UpdateEmitter<Page> implements Page {
         snakeParts.add(0, newHead);
 
         Tuple<Integer, Integer> snakeTail = snakeParts.get(snakeParts.size() - 1);
-        template.getSlot(snakeTail.getFirst(), snakeTail.getSecond()).setButton(null);
+        template.getSlot(snakeTail.getA(), snakeTail.getB()).setButton(null);
         snakeParts.remove(snakeParts.size() - 1);
 
         for (Tuple<Integer, Integer> snakePart : snakeParts) {
-            template.getSlot(snakePart.getFirst(), snakePart.getSecond()).setButton(snakeBall);
+            template.getSlot(snakePart.getA(), snakePart.getB()).setButton(snakeBall);
         }
-        if (applePosition.getFirst() == newHeadRow && applePosition.getSecond() == newHeadCol) {
+        if (applePosition.getA() == newHeadRow && applePosition.getB() == newHeadCol) {
             addSnakePart();
             createApple();
         }

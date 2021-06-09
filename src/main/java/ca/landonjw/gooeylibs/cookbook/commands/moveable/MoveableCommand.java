@@ -1,4 +1,4 @@
-package ca.landonjw.gooeylibs.cookbook.commands.synchronization;
+package ca.landonjw.gooeylibs.cookbook.commands.moveable;
 
 import ca.landonjw.gooeylibs2.api.UIManager;
 import ca.landonjw.gooeylibs2.api.button.moveable.MovableButton;
@@ -13,9 +13,7 @@ import net.minecraft.command.Commands;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class SynchronizedCommand implements Command<CommandSource> {
-
-    private final SynchronizedPage page = new SynchronizedPage();
+public class MoveableCommand implements Command<CommandSource> {
 
     @Override
     public int run(CommandContext<CommandSource> context) {
@@ -39,8 +37,8 @@ public class SynchronizedCommand implements Command<CommandSource> {
 
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(
-                Commands.literal("syncpage")
-                        .executes(new SynchronizedCommand())
+                Commands.literal("moveable")
+                        .executes(new MoveableCommand())
                         .requires(src -> src.hasPermissionLevel(0))
         );
     }

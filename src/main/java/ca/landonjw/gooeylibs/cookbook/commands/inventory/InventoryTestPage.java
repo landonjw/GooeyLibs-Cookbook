@@ -8,28 +8,19 @@ import ca.landonjw.gooeylibs2.api.page.GooeyPage;
 import ca.landonjw.gooeylibs2.api.page.Page;
 import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.item.Items;
 
-public class InventoryTestPage extends CommandBase {
-
-    @Override
-    public String getName() {
-        return "inventorypage";
-    }
+public class InventoryTestPage implements Command<CommandSource> {
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/inventorypage";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public int run(CommandContext<CommandSource> context) {
         Button setButton = GooeyButton.builder()
                 .display(new ItemStack(Items.DIAMOND))
                 .title("Set diamond in first inventory slot")
@@ -73,7 +64,18 @@ public class InventoryTestPage extends CommandBase {
                 .template(template)
                 .build();
 
-        UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+        try {
+            UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+        } catch (CommandSyntaxException ignored) {}
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("inventorypage")
+                        .executes(new InventoryTestPage())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }

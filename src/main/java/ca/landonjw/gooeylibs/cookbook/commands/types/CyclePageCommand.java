@@ -7,41 +7,45 @@ import ca.landonjw.gooeylibs2.api.page.GooeyPage;
 import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.TemplateType;
 import ca.landonjw.gooeylibs2.api.template.types.*;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.item.Items;
 
-public class CylePageCommand extends CommandBase {
+import java.util.ArrayList;
+
+public class CyclePageCommand implements Command<CommandSource> {
 
     private int ordinal = 0;
 
     @Override
-    public String getName() {
-        return "cyclepage";
-    }
+    public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
+        ServerPlayerEntity sender = context.getSource().asPlayer();
 
-    @Override
-    public String getUsage(ICommandSender sender) {
-        return "/cyclepage";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         Template template = getTemplate();
 
         GooeyPage page = GooeyPage.builder()
                 .template(template)
                 .build();
 
-        UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+        UIManager.openUIForcefully(sender, page);
+        return 0;
     }
 
     private Template getTemplate() {
-        ordinal = ordinal + 1;
+
+        ArrayList<String> arr = new ArrayList<>();
+        for (int i = 0; i < ordinal; i++) {
+            arr.add("Foo!");
+        }
+        arr.add("Bar!");
+        ordinal = arr.size();
+
         Button button = GooeyButton.builder()
                 .display(new ItemStack(Items.DIAMOND))
                 .build();
@@ -91,6 +95,14 @@ public class CylePageCommand extends CommandBase {
                         .build();
         }
         throw new IllegalStateException("shouldn't have reached here");
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("cyclepage")
+                        .executes(new CyclePageCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }

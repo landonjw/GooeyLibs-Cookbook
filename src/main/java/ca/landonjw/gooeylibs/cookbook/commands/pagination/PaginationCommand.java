@@ -1,5 +1,6 @@
 package ca.landonjw.gooeylibs.cookbook.commands.pagination;
 
+import ca.landonjw.gooeylibs2.api.UIManager;
 import ca.landonjw.gooeylibs2.api.button.Button;
 import ca.landonjw.gooeylibs2.api.button.GooeyButton;
 import ca.landonjw.gooeylibs2.api.button.PlaceholderButton;
@@ -8,33 +9,24 @@ import ca.landonjw.gooeylibs2.api.button.linked.LinkedPageButton;
 import ca.landonjw.gooeylibs2.api.helpers.PaginationHelper;
 import ca.landonjw.gooeylibs2.api.page.LinkedPage;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.block.Blocks;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaginationCommand extends CommandBase {
+public class PaginationCommand implements Command<CommandSource> {
 
     @Override
-    public String getName() {
-        return "pageinv";
-    }
-
-    @Override
-    public String getUsage(ICommandSender sender) {
-        return "/pageinv";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public int run(CommandContext<CommandSource> context) {
         List<Button> buttons = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Button button = GooeyButton.builder()
@@ -44,7 +36,7 @@ public class PaginationCommand extends CommandBase {
         }
 
         GooeyButton filler = GooeyButton.builder()
-                .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.BLUE.getMetadata()))
+                .display(new ItemStack(Blocks.BLUE_STAINED_GLASS_PANE))
                 .build();
 
         LinkedPageButton previous = LinkedPageButton.builder()
@@ -68,7 +60,21 @@ public class PaginationCommand extends CommandBase {
                 .set(5, 5, next)
                 .build();
 
-        LinkedPage firstPage = PaginationHelper.createPagesFromPlaceholders(template, buttons, null);
+        LinkedPage page = PaginationHelper.createPagesFromPlaceholders(template, buttons, null);
+
+        try {
+            UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+        } catch (CommandSyntaxException ignored) {}
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("pagination")
+                        .executes(new ca.landonjw.gooeylibs.cookbook.commands.moveable.MoveableCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }
+

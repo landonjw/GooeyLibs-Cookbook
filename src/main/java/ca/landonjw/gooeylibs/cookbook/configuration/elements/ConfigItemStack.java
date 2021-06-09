@@ -21,7 +21,7 @@ public class ConfigItemStack extends ConfigElement<ItemStack> {
     public void setValue(JsonElement data) {
         String itemStr = data.getAsString();
         String[] split = itemStr.split(" ");
-        Item item = Item.getByNameOrId(split[0]);
+        Item item = Item.getItemById(Integer.parseInt(split[0]));
         if(item == null) {
             value = ItemStack.EMPTY;
         }

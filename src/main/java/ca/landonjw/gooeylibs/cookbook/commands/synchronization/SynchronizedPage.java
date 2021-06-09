@@ -5,8 +5,7 @@ import ca.landonjw.gooeylibs2.api.data.UpdateEmitter;
 import ca.landonjw.gooeylibs2.api.page.Page;
 import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
@@ -20,20 +19,20 @@ public class SynchronizedPage extends UpdateEmitter<Page> implements Page {
     private String title;
 
     private final GooeyButton setInactiveButton = GooeyButton.builder()
-            .display(new ItemStack(Blocks.WOOL, 1, EnumDyeColor.RED.getMetadata()))
+            .display(new ItemStack(Blocks.RED_WOOL))
             .title("Set Inactive")
             .onClick(() -> setActive(false))
             .build();
 
     private final GooeyButton setActiveButton = GooeyButton.builder()
-            .display(new ItemStack(Blocks.WOOL, 1, EnumDyeColor.GREEN.getMetadata()))
+            .display(new ItemStack(Blocks.GREEN_WOOL))
             .title("Set Active")
             .onClick(() -> setActive(true))
             .build();
 
     public SynchronizedPage() {
         GooeyButton filler = GooeyButton.builder()
-                .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.GRAY.getMetadata()))
+                .display(new ItemStack(Blocks.GRAY_STAINED_GLASS_PANE))
                 .build();
 
         this.template = ChestTemplate.builder(6)

@@ -9,10 +9,9 @@ import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
 import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
 import ca.landonjw.gooeylibs2.implementation.tasks.Task;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.Optional;
@@ -25,15 +24,15 @@ public class RateLimitPage extends UpdateEmitter<Page> implements Page {
     private String title = "Rate Limit Demonstration";
 
     private final Button greenPane = GooeyButton.builder()
-            .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.GREEN.getMetadata()))
+            .display(new ItemStack(Blocks.GREEN_STAINED_GLASS_PANE))
             .build();
 
     private final Button yellowPane = GooeyButton.builder()
-            .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.YELLOW.getMetadata()))
+            .display(new ItemStack(Blocks.YELLOW_STAINED_GLASS_PANE))
             .build();
 
     private final Button redPane = GooeyButton.builder()
-            .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.RED.getMetadata()))
+            .display(new ItemStack(Blocks.RED_STAINED_GLASS_PANE))
             .build();
 
     private final RateLimitedButton rateLimitedButton;

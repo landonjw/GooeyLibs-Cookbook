@@ -7,10 +7,9 @@ import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
 import ca.landonjw.gooeylibs2.implementation.tasks.Task;
 import com.google.common.collect.Lists;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class AnimatedPage extends UpdateEmitter<Page> implements Page {
     private int frameIndex;
 
     private final GooeyButton filler = GooeyButton.builder()
-            .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.GRAY.getMetadata()))
+            .display(new ItemStack(Blocks.GRAY_STAINED_GLASS_PANE, 1))
             .build();
 
     private final GooeyButton diamond = GooeyButton.builder()

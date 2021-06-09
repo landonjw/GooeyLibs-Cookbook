@@ -8,11 +8,9 @@ import ca.landonjw.gooeylibs2.api.page.PageAction;
 import ca.landonjw.gooeylibs2.api.template.Template;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
 import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
-import com.pixelmonmod.pixelmon.config.PixelmonItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
@@ -31,7 +29,7 @@ public class ShooterPage extends UpdateEmitter<Page> implements Page {
 
     private final Button projectile = GooeyButton.builder()
             .title("")
-            .display(new ItemStack(Items.FIREWORKS))
+            .display(new ItemStack(Items.FIREWORK_ROCKET))
             .build();
 
     public ShooterPage() {
@@ -39,19 +37,19 @@ public class ShooterPage extends UpdateEmitter<Page> implements Page {
 
         Button moveLeft = GooeyButton.builder()
                 .title(TextFormatting.GOLD + "Move Left")
-                .display(new ItemStack(PixelmonItems.LtradeHolderLeft))
+                .display(new ItemStack(Items.SLIME_BALL))
                 .onClick(() -> controller.movePlayer(ShooterController.Direction.LEFT))
                 .build();
 
         Button shoot = GooeyButton.builder()
                 .title(TextFormatting.GOLD + "Shoot")
-                .display(new ItemStack(Items.FIREWORKS))
+                .display(new ItemStack(Items.FIREWORK_ROCKET))
                 .onClick(controller::shoot)
                 .build();
 
         Button moveRight = GooeyButton.builder()
                 .title(TextFormatting.GOLD + "Move Right")
-                .display(new ItemStack(PixelmonItems.tradeHolderRight))
+                .display(new ItemStack(Items.SLIME_BALL))
                 .onClick(() -> controller.movePlayer(ShooterController.Direction.RIGHT))
                 .build();
 
@@ -68,7 +66,7 @@ public class ShooterPage extends UpdateEmitter<Page> implements Page {
         // If the game is over, Fill the page with all red panes and change title.
         if (controller.isGameOver()) {
             Button redFiller = GooeyButton.builder()
-                    .display(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.RED.getMetadata()))
+                    .display(new ItemStack(Blocks.RED_STAINED_GLASS_PANE))
                     .title("")
                     .build();
             for (int i = 0; i < template.getSize(); i++)

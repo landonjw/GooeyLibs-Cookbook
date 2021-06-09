@@ -1,28 +1,31 @@
 package ca.landonjw.gooeylibs.cookbook.commands.snake;
 
 import ca.landonjw.gooeylibs2.api.UIManager;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 
-public class SnakeCommand extends CommandBase {
-
-    @Override
-    public String getName() {
-        return "snakegame";
-    }
+public class SnakeCommand implements Command<CommandSource> {
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/snakegame";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public int run(CommandContext<CommandSource> context) {
         SnakePage page = new SnakePage();
-        UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+
+        try {
+            UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+        } catch (CommandSyntaxException ignored) {}
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("snakegame")
+                        .executes(new SnakeCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }

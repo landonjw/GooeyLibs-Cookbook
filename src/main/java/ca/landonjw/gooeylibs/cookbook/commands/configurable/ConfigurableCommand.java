@@ -4,28 +4,19 @@ import ca.landonjw.gooeylibs2.api.UIManager;
 import ca.landonjw.gooeylibs2.api.button.GooeyButton;
 import ca.landonjw.gooeylibs2.api.page.GooeyPage;
 import ca.landonjw.gooeylibs2.api.template.types.InventoryTemplate;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.item.Items;
 
-public class ConfigurableCommand extends CommandBase {
-
-    @Override
-    public String getName() {
-        return "configurable";
-    }
+public class ConfigurableCommand implements Command<CommandSource> {
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "configurable";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public int run(CommandContext<CommandSource> context) {
         GooeyButton filler = GooeyButton.of(new ItemStack(Items.DIAMOND));
 
         GooeyButton filler2 = GooeyButton.of(new ItemStack(Items.EMERALD));
@@ -52,8 +43,19 @@ public class ConfigurableCommand extends CommandBase {
                             .inventory(inventoryTemplate)
                             .build();
 
-                    UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+                    try {
+                        UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+                    } catch (CommandSyntaxException ignored) {}
                 });
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("configpage")
+                        .executes(new ConfigurableCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }

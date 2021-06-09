@@ -1,28 +1,31 @@
 package ca.landonjw.gooeylibs.cookbook.commands.ratelimit;
 
 import ca.landonjw.gooeylibs2.api.UIManager;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 
-public class RateLimitPageCommand extends CommandBase {
-
-    @Override
-    public String getName() {
-        return "ratelimit";
-    }
+public class RateLimitPageCommand implements Command<CommandSource> {
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/ratelimit";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public int run(CommandContext<CommandSource> context) {
         RateLimitPage page = new RateLimitPage();
-        UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+
+        try {
+            UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+        } catch (CommandSyntaxException ignored) {}
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("ratelimit")
+                        .executes(new RateLimitPageCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }

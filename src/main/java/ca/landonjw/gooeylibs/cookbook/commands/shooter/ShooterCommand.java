@@ -1,27 +1,31 @@
 package ca.landonjw.gooeylibs.cookbook.commands.shooter;
 
 import ca.landonjw.gooeylibs2.api.UIManager;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 
-public class ShooterCommand extends CommandBase {
-
-    @Override
-    public String getName() {
-        return "shooter";
-    }
+public class ShooterCommand implements Command<CommandSource> {
 
     @Override
-    public String getUsage(ICommandSender sender) {
-        return "/shooter";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    public int run(CommandContext<CommandSource> context) {
         ShooterPage page = new ShooterPage();
-        UIManager.openUIForcefully((EntityPlayerMP) sender, page);
+
+        try {
+            UIManager.openUIForcefully(context.getSource().asPlayer(), page);
+        } catch (CommandSyntaxException ignored) {}
+        return 0;
+    }
+
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+        dispatcher.register(
+                Commands.literal("shooter")
+                        .executes(new ShooterCommand())
+                        .requires(src -> src.hasPermissionLevel(0))
+        );
     }
 
 }
